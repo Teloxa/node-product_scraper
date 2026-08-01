@@ -1,0 +1,29 @@
+{
+  "name": "product_scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Teloxa/node-product_scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Teloxa/node-product_scraper/issues"
+  },
+  "homepage": "https://github.com/Teloxa/node-product_scraper#readme",
+  "dependencies": {
+    "axios": "^1.19.0",
+    "cheerio": "^1.2.0",
+    "puppeteer": "^24.43.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
