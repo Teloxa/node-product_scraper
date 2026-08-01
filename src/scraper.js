@@ -28,5 +28,7 @@ constructor() {
             });
             return response.data
         } catch(error) {
-            console.log("Error case");
+            console.error(`Error with the page ${pageNumber}`, error.message);
+            return null;
         }
+    } }
