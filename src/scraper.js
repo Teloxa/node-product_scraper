@@ -63,5 +63,40 @@ constructor() {
                 url: bookUrl
             });
         });
+        return books;
     } 
+    // Principal method to run the scraping process
+    async scrapeAll() {
+        console.log('Starting the scraping process...');
+
+        for(let page = 1; page <= this.pagesToScrape; page++) {
+            const html = await this.fetchPage(page);
+
+            if(html) {
+                const booksOnPage = this.extractBooks(html);
+                this.books.push(...booksOnPage);
+                console.log(` Scraped ${booksOnPage.length} books from page ${page}`);
+            }
+            // Wait for 1 second before scraping the next page to avoid overwhelming the server
+            await this.delay(1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+        }
+        console.log(` Scraping completed. Total books scraped: ${this.books.length}`);
+    }
+    // Method to save the scraped data to a JSON file
+    async saveToFile(filename = 'products.json') {
+        const filePath = path.join(dirname, '../data', filename);
+
+        // Ensure the data directory exists
+        await fs.mkdir(path.dirname(filePath), { recursive: true });
+
+        // Write the scraped data to the JSON file
+        await fs.writeFile(filePath, JSON.stringify(this.books, null, 2));
+        console.log(`Scraped data saved to ${filePath}`);
+    }
+    // Utility method to introduce a delay
+    async sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
+
+module.exports = bookScrapper;
