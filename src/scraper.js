@@ -39,4 +39,29 @@ constructor() {
         const books = [];
 
         // Iterate through each book item on the page
-    }
+        $('article.product_pod').each((index, element) => {
+            const title = $(element).find('h3 a').attr('title');
+            const price = $(element).find('.price_color').text();
+            const availability = $(element).find('.instock.availability')
+            .text().trim();
+
+            // extract qualification from the class attribute
+            const ratingClass = $(element).find('.star-rating').attr('class');
+            const ratingMap = {
+                'One': 1, 'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5
+            };
+            const rating = ratingMap[ratingClass?.split(' ')[1]] || 0; 
+
+            // Extract URL of the book
+            const bookUrl = $(element).find('h3 a').attr('href');
+
+            book.push({
+                title, 
+                price,
+                availability,
+                rating,
+                url: bookUrl
+            });
+        });
+    } 
+}
