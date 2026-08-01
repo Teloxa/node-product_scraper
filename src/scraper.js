@@ -20,7 +20,7 @@ constructor() {
             const url = `${BASE_URL}${pageNumber}.html`;
             console.log(` Page Scrapping ${pageNumber}...`);
 
-            const response = await axios.get(url{
+            const response = await axios.get(url, {
                 headers: {
                     'User-Agent': USER_AGENT
                 },
@@ -31,4 +31,12 @@ constructor() {
             console.error(`Error with the page ${pageNumber}`, error.message);
             return null;
         }
-    } }
+    }
+    
+    // method to extract book data from the HTML content
+    extractBooks(html) {
+        const $ = cheerio.load(html);
+        const books = [];
+
+        // Iterate through each book item on the page
+    }
