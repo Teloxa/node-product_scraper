@@ -1,7 +1,7 @@
 // scrapping logic
 const axios = require("axios");
 const cheerio = require("cheerio");
-const fs = require("fs");
+const fs = require("fs").promises;
 const path = require("path");
 
 // set up
@@ -55,7 +55,7 @@ constructor() {
             // Extract URL of the book
             const bookUrl = $(element).find('h3 a').attr('href');
 
-            book.push({
+            books.push({
                 title, 
                 price,
                 availability,
@@ -78,13 +78,14 @@ constructor() {
                 console.log(` Scraped ${booksOnPage.length} books from page ${page}`);
             }
             // Wait for 1 second before scraping the next page to avoid overwhelming the server
-            await this.delay(1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+            await this.sleep(1000 + Math.random() * 2000); // Random delay between 1-3 seconds
         }
         console.log(` Scraping completed. Total books scraped: ${this.books.length}`);
+        return this.books;
     }
     // Method to save the scraped data to a JSON file
     async saveToFile(filename = 'products.json') {
-        const filePath = path.join(dirname, '../data', filename);
+        const filePath = path.join(__dirname, '../data', filename);
 
         // Ensure the data directory exists
         await fs.mkdir(path.dirname(filePath), { recursive: true });
@@ -99,4 +100,4 @@ constructor() {
     }
 }
 
-module.exports = bookScrapper;
+module.exports = bookScraper;
