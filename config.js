@@ -10,3 +10,4 @@ module.exports  = {
   // The timeout in milliseconds for network requests. This helps to prevent the scraper from hanging indefinitely on slow responses.
   userAgent: process.env.USER_AGENT || 'Mozilla/5.0 [en] (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36'
 }
+  
