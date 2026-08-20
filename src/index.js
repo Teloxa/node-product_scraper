@@ -6,6 +6,10 @@
 // 4. print a small summary for quick verification
 
 const BookScraper = require('./scraper');
+const { processBooks } = require('../dataProcessor');
+
+const books = await scrapeAll();
+const processedBooks = processBooks(books);
 
 async function main() {
     try {
